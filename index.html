@@ -1,129 +1,755 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saidil | Digital Portfolio</title>
+    <title>Muh. Fachri Akbar — Portfolio</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-grid {
-            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 24px 24px;
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                }
+            }
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    </script>
+    <style>
+        /* Neo-Brutalist UI Styling Elements */
+        .neo-border {
+            border: 4px solid #000000;
+        }
+        .neo-border-sm {
+            border: 2px solid #000000;
+        }
+        .neo-shadow {
+            box-shadow: 6px 6px 0px #000000;
+        }
+        .neo-shadow-sm {
+            box-shadow: 3px 3px 0px #000000;
+        }
+        .neo-shadow-lg {
+            box-shadow: 10px 10px 0px #000000;
+        }
+        /* Hover transitions & movement */
+        .neo-btn-primary {
+            background-color: #FDE047; /* yellow-300 */
+            transition: all 0.15s ease-in-out;
+        }
+        .neo-btn-primary:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #000000;
+        }
+        .neo-btn-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        .neo-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .neo-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px #000000;
+        }
+        /* Custom scrollbar to match aesthetic */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F4F0;
+            border-left: 4px solid #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+            border: 2px solid #F4F4F0;
+        }
+        /* Custom selection color */
+        ::selection {
+            background-color: #FB923C;
+            color: #000000;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 bg-grid">
+<body class="bg-[#F4F4F0] text-black font-sans selection:bg-[#FB923C] selection:text-black overflow-x-hidden">
 
-    <nav class="fixed w-full bg-white/70 backdrop-blur-lg z-50 border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="font-bold text-lg tracking-tight">Saidil.dev</span>
-            <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
-                <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
-                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
-            </div>
-            <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full font-medium text-sm transition shadow-lg shadow-blue-200">Connect</a>
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-[#F4F4F0] border-b-4 border-black px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="font-display font-bold text-xl sm:text-2xl tracking-tight bg-[#2DD4BF] py-1 px-3 neo-border neo-shadow-sm flex items-center gap-2 hover:scale-105 transition-transform" onclick="playBeep()">
+                <i class="fa-solid fa-hard-hat"></i> FACHRI.AKBAR
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 font-display font-bold">
+                <a href="#about" class="hover:underline hover:text-[#FB923C] transition-colors" onclick="playBeep()">SIAPA SAYA?</a>
+                <a href="#experience" class="hover:underline hover:text-[#2DD4BF] transition-colors" onclick="playBeep()">PENGALAMAN</a>
+                <a href="#projects" class="hover:underline hover:text-[#FDE047] transition-colors" onclick="playBeep()">PORTFOLIO</a>
+                <a href="#command" class="hover:underline hover:text-[#FB923C] transition-colors" onclick="playBeep()">COMMAND CENTER</a>
+                <a href="#contact" class="bg-black text-white px-4 py-2 neo-border neo-shadow-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all" onclick="playBeep()">HUBUNGI SAYA</a>
+            </nav>
+
+            <!-- Mobile Navigation Toggle -->
+            <button id="menu-btn" class="md:hidden bg-[#FB923C] p-2 neo-border neo-shadow-sm focus:outline-none" onclick="toggleMenu(); playBeep();">
+                <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
         </div>
-    </nav>
 
-    <header id="about" class="pt-32 pb-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="mb-6 inline-block p-1 bg-white rounded-full shadow-md">
-                <!-- Foto Profil -->
-                <img src="Konten Instagram Card Reveal Clash of Champions Season 3 Modern Biru Hitam.jpg" 
-                     alt="Saidil Profile" 
-                     class="w-32 h-32 rounded-full object-cover"
-                     onerror="this.src='https://placehold.co/150x150/e0f2fe/2563eb?text=Saidil'">
-            </div>
-            
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white border border-slate-200 shadow-sm text-sm font-medium text-blue-600">
-                🚀 Mahasiswa TIK PNUP
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-                Halo, saya <span class="gradient-text">Saidil</span>
-            </h1>
-            
-            <p class="text-xl md:text-2xl text-slate-600 mb-8 font-light max-w-2xl mx-auto">
-                Mahasiswa Teknik Informatika & Komputer (TIK) Politeknik Negeri Ujung Pandang | Pemimpin & Tech Enthusiast
-            </p>
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden absolute left-0 right-0 top-[76px] bg-[#FDE047] border-b-4 border-black p-6 flex flex-col gap-4 font-display font-bold shadow-lg">
+            <a href="#about" class="border-b-2 border-black pb-2 text-lg" onclick="toggleMenu(); playBeep();">SIAPA SAYA?</a>
+            <a href="#experience" class="border-b-2 border-black pb-2 text-lg" onclick="toggleMenu(); playBeep();">PENGALAMAN</a>
+            <a href="#projects" class="border-b-2 border-black pb-2 text-lg" onclick="toggleMenu(); playBeep();">PORTFOLIO</a>
+            <a href="#command" class="border-b-2 border-black pb-2 text-lg" onclick="toggleMenu(); playBeep();">COMMAND CENTER</a>
+            <a href="#contact" class="bg-black text-white text-center py-3 neo-border" onclick="toggleMenu(); playBeep();">HUBUNGI SAYA</a>
         </div>
     </header>
 
-    <section id="experience" class="py-20 px-6 bg-white/50">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Pengalaman Organisasi</h2>
-            <div class="space-y-6">
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h3 class="text-xl font-bold">Ketua, MPK SMAN 7 Makassar</h3>
-                    <p class="text-blue-600 text-sm font-medium mb-3">Januari 2024 - Sekarang</p>
-                    <ul class="text-slate-600 text-sm list-disc pl-5 space-y-1">
-                        <li>Memimpin anggota dalam menyelenggarakan kegiatan sekolah.</li>
-                        <li>Mengelola Musyawarah Perwakilan Kelas (Mukilas).</li>
-                        <li>Mengawasi kinerja OSIS dan menyusun Laporan Hasil Pengawasan.</li>
-                    </ul>
+    <!-- HERO SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Text Intro -->
+        <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+            <!-- Badge -->
+            <div class="inline-flex flex-wrap gap-2">
+                <span class="bg-[#2DD4BF] text-black font-display font-bold px-3 py-1 text-xs sm:text-sm neo-border neo-shadow-sm">
+                    🏗️ 1B JASA KONSTRUKSI PNUP
+                </span>
+                <span class="bg-[#FB923C] text-black font-display font-bold px-3 py-1 text-xs sm:text-sm neo-border neo-shadow-sm">
+                    🚀 GOOGLE STUDENT AMBASSADOR 2026
+                </span>
+            </div>
+            
+            <!-- Big Hero Title -->
+            <h1 class="font-display font-bold text-4xl sm:text-6xl md:text-7xl leading-none text-black">
+                Membangun Fisik,<br>
+                <span class="bg-[#FDE047] px-2 py-1 neo-border inline-block rotate-1 my-1">Merekayasa Digital</span>
+            </h1>
+
+            <!-- Pitch/Introduction -->
+            <p class="text-lg md:text-xl font-medium max-w-xl text-zinc-700 leading-relaxed">
+                Halo, saya <span class="font-bold underline">Muh. Fachri Akbar</span>. Seorang mahasiswa Teknik Sipil & Jasa Konstruksi di PNUP Makassar, GSA 2026, dan kreator konten digital yang menggabungkan presisi struktur dengan imajinasi teknologi kecerdasan buatan (AI).
+            </p>
+
+            <!-- Hero Action Buttons -->
+            <div class="flex flex-wrap gap-4 pt-4">
+                <a href="#projects" class="px-6 py-4 font-display font-bold text-lg neo-btn-primary neo-border neo-shadow" onclick="playBeep()">
+                    Lihat Portofolio <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#contact" class="px-6 py-4 font-display font-bold text-lg bg-white hover:bg-zinc-100 neo-border neo-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all" onclick="playBeep()">
+                    Kolaborasi <i class="fa-solid fa-paper-plane ml-2"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Interactive Hero Card Widget -->
+        <div class="lg:col-span-5 relative mt-8 lg:mt-0">
+            <!-- Back shadow element -->
+            <div class="absolute inset-0 bg-black neo-border rounded-xl translate-x-3 translate-y-3"></div>
+            <!-- Main Card Container -->
+            <div class="relative bg-white neo-border p-6 rounded-xl flex flex-col space-y-6">
+                <!-- Card Header (simulated window bar) -->
+                <div class="flex justify-between items-center border-b-4 border-black pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-4 h-4 rounded-full bg-red-500 border-2 border-black"></span>
+                        <span class="w-4 h-4 rounded-full bg-yellow-400 border-2 border-black"></span>
+                        <span class="w-4 h-4 rounded-full bg-green-500 border-2 border-black"></span>
+                    </div>
+                    <span class="font-display font-bold text-sm bg-black text-[#2DD4BF] px-3 py-1 rounded">ID: FACHRI_AKBAR_2026</span>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h3 class="text-xl font-bold">Wakil Sekretaris, MPK SMAN 7 Makassar</h3>
-                    <p class="text-blue-600 text-sm font-medium mb-3">Januari 2023 - Januari 2024</p>
-                    <ul class="text-slate-600 text-sm list-disc pl-5 space-y-1">
-                        <li>Manajemen administrasi, pengarsipan surat, dan dokumen organisasi.</li>
-                        <li>Membuat buku induk organisasi dan sistem pelaporan.</li>
-                    </ul>
+
+                <!-- Profile Picture Display Box -->
+                <div class="flex justify-center items-center py-2">
+                    <div class="relative w-56 h-56 bg-[#FDE047] neo-border neo-shadow rounded-xl overflow-hidden group">
+                        <img src="9c04149d-1210-46ce-a24e-06ec6400c6cd.webp" alt="Muh. Fachri Akbar Avatar" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.src='https://placehold.co/400x400/FDE047/000000?text=FACHRI+AKBAR'">
+                        <!-- Floating fun tag inside profile box -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-black text-[#FDE047] text-center font-mono text-xs py-1.5 font-bold border-t-4 border-black tracking-widest uppercase">
+                            when_deadline.exe 🛠️
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bio Stats Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-[#FDE047] p-4 neo-border-sm neo-shadow-sm rounded">
+                        <p class="text-xs font-bold text-zinc-600 uppercase">Fokus Studi</p>
+                        <p class="font-display font-bold text-lg">Teknik Sipil / BIM</p>
+                    </div>
+                    <div class="bg-[#2DD4BF] p-4 neo-border-sm neo-shadow-sm rounded">
+                        <p class="text-xs font-bold text-zinc-600 uppercase">Domisili</p>
+                        <p class="font-display font-bold text-lg">Makassar, ID</p>
+                    </div>
+                    <div class="bg-[#FB923C] p-4 neo-border-sm neo-shadow-sm rounded col-span-2">
+                        <p class="text-xs font-bold text-zinc-700 uppercase">Afiliasi Utama</p>
+                        <p class="font-display font-bold text-base">Politeknik Negeri Ujung Pandang</p>
+                    </div>
+                </div>
+
+                <!-- Custom Quote Widget -->
+                <div class="bg-zinc-100 p-4 neo-border-sm rounded relative">
+                    <i class="fa-solid fa-quote-left absolute -top-3 -left-1 text-3xl text-zinc-300"></i>
+                    <p class="italic text-sm text-zinc-800 relative z-10 pl-4 font-medium">
+                        "Struktur bangunan harus kokoh untuk menopang kehidupan; teknologi harus berakar kuat untuk memberdayakan masa depan."
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
-            <div>
-                <h2 class="text-2xl font-bold mb-6">Skills</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">Leadership</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">Public Speaking</span>
-                    <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">IT Management</span>
-                    <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">Microsoft Office</span>
-                    <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium">Digital Literacy</span>
+    <!-- QUICK STATS SECTION -->
+    <section class="border-t-4 border-b-4 border-black bg-black text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div class="p-4 border-2 border-white sm:border-0">
+                <p class="text-4xl sm:text-5xl font-display font-bold text-[#FDE047]">1B</p>
+                <p class="text-xs sm:text-sm font-semibold tracking-wider text-zinc-400 mt-2 uppercase">Kelas Jasa Konstruksi</p>
+            </div>
+            <div class="p-4 border-2 border-white sm:border-0">
+                <p class="text-4xl sm:text-5xl font-display font-bold text-[#2DD4BF]">GSA</p>
+                <p class="text-xs sm:text-sm font-semibold tracking-wider text-zinc-400 mt-2 uppercase">Google Ambassador '26</p>
+            </div>
+            <div class="p-4 border-2 border-white sm:border-0">
+                <p class="text-4xl sm:text-5xl font-display font-bold text-[#FB923C]">10+</p>
+                <p class="text-xs sm:text-sm font-semibold tracking-wider text-zinc-400 mt-2 uppercase">Event Kepanduan & Organisasi</p>
+            </div>
+            <div class="p-4 border-2 border-white sm:border-0">
+                <p class="text-4xl sm:text-5xl font-display font-bold text-white">100%</p>
+                <p class="text-xs sm:text-sm font-semibold tracking-wider text-zinc-400 mt-2 uppercase">Passion & Brutalist Design</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & CORE PILLARS SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
+        <div class="mb-12">
+            <h2 class="font-display font-bold text-3xl sm:text-5xl inline-block bg-[#FDE047] px-4 py-2 neo-border neo-shadow-sm rotate-[-1deg]">
+                3 PILAR FOKUS SAYA
+            </h2>
+            <p class="mt-4 text-zinc-600 font-medium max-w-lg">Bagaimana saya mendistribusikan waktu dan hasrat saya dalam mengembangkan keahlian.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Civil Engineering -->
+            <div class="bg-white p-6 neo-border neo-shadow rounded-xl neo-card flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-[#2DD4BF] rounded-lg neo-border-sm flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-drafting-compass"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Teknik Sipil & Konstruksi</h3>
+                    <p class="text-zinc-600 text-sm leading-relaxed">
+                        Sebagai mahasiswa Jasa Konstruksi di PNUP, saya mendalami analisis struktur, mekanika rekayasa, manajemen mutu K3, serta penggunaan *Building Information Modeling* (BIM) seperti Revit dan Tekla Structures untuk rancangan presisi.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-black flex justify-between items-center text-xs font-bold text-zinc-700">
+                    <span>REKAYASA STRUKTUR</span>
+                    <span class="bg-[#2DD4BF] px-2 py-1 rounded">PNUP</span>
                 </div>
             </div>
-            <div>
-                <h2 class="text-2xl font-bold mb-6">Education</h2>
-                <div class="space-y-4">
-                    <div class="border-l-2 border-blue-200 pl-4">
-                        <p class="font-bold">Politeknik Negeri Ujung Pandang</p>
-                        <p class="text-sm text-slate-500">Teknik Informatika & Komputer</p>
+
+            <!-- Card 2: Tech & Community -->
+            <div class="bg-white p-6 neo-border neo-shadow rounded-xl neo-card flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-[#FDE047] rounded-lg neo-border-sm flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
-                    <div class="border-l-2 border-slate-200 pl-4">
-                        <p class="font-bold">SMAN 7 Makassar</p>
-                        <p class="text-sm text-slate-500">2022 - 2025</p>
+                    <h3 class="font-display font-bold text-2xl mb-3">Teknologi & Kepemimpinan</h3>
+                    <p class="text-zinc-600 text-sm leading-relaxed">
+                        Mewakili Google Student Ambassador (GSA) di tahun 2026. Bersemangat dalam menjembatani teknologi AI dengan komunitas lokal, mengelola kegiatan pengembangan bakat kepemimpinan pramuka (Saka Bhayangkara), serta aktif dalam platform coding inovatif.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-black flex justify-between items-center text-xs font-bold text-zinc-700">
+                    <span>GSA 2026 & AI</span>
+                    <span class="bg-[#FDE047] px-2 py-1 rounded">LEADERSHIP</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Digital Creation -->
+            <div class="bg-white p-6 neo-border neo-shadow rounded-xl neo-card flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 bg-[#FB923C] rounded-lg neo-border-sm flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-3">Pembuatan Konten Digital</h3>
+                    <p class="text-zinc-600 text-sm leading-relaxed">
+                        Kreator konten digital di Instagram dan TikTok. Mendedikasikan diri untuk merancang visual berkarakter kuat menggunakan Canva & CapCut, bereksperimen dengan desain estetika Brutalisme yang lugas dan berani menarik perhatian audiens.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-black flex justify-between items-center text-xs font-bold text-zinc-700">
+                    <span>CANVA & CAPCUT</span>
+                    <span class="bg-[#FB923C] px-2 py-1 rounded">BRUTALISM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE SECTION -->
+    <section id="experience" class="bg-[#FB923C] border-t-4 border-b-4 border-black py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="mb-12">
+                <h2 class="font-display font-bold text-3xl sm:text-5xl inline-block bg-white px-4 py-2 neo-border neo-shadow-sm rotate-[1deg]">
+                    PERJALANAN AKTIVITAS
+                </h2>
+                <p class="mt-4 text-black font-semibold max-w-lg">Jalur rekam jejak pengabdian organisasi, pencapaian, dan pengembangan diri saya.</p>
+            </div>
+
+            <div class="relative border-l-4 border-black ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12">
+                <!-- Timeline Event 1 -->
+                <div class="relative">
+                    <!-- Bullet node -->
+                    <div class="absolute -left-[38px] sm:-left-[54px] top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white border-4 border-black neo-shadow-sm flex items-center justify-center">
+                        <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
+                    </div>
+                    <!-- Card content -->
+                    <div class="bg-white p-6 neo-border neo-shadow rounded-xl max-w-3xl">
+                        <span class="bg-[#2DD4BF] font-display font-bold text-xs px-2.5 py-1 rounded neo-border-sm">TAHUN 2026</span>
+                        <h4 class="font-display font-bold text-xl sm:text-2xl mt-3">Google Student Ambassador (GSA) PNUP</h4>
+                        <p class="text-xs font-bold text-zinc-500 uppercase mt-1">Google Student Developer Community</p>
+                        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">
+                            Terpilih untuk mengoordinasi dan menyebarkan literasi teknologi dari Google ke lingkungan kampus Politeknik Negeri Ujung Pandang. Mengembangkan rencana workshop AI, serta menginspirasi rekan-rekan mahasiswa untuk memecahkan problem lokal menggunakan ekosistem digital.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Event 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[38px] sm:-left-[54px] top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#FDE047] border-4 border-black neo-shadow-sm flex items-center justify-center">
+                        <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
+                    </div>
+                    <div class="bg-white p-6 neo-border neo-shadow rounded-xl max-w-3xl">
+                        <span class="bg-[#FDE047] font-display font-bold text-xs px-2.5 py-1 rounded neo-border-sm">TAHUN 2025</span>
+                        <h4 class="font-display font-bold text-xl sm:text-2xl mt-3">Pimpinan Kontingen Pergantara Gorontalo</h4>
+                        <p class="text-xs font-bold text-zinc-500 uppercase mt-1">Saka Bhayangkara & DKC Kota Makassar</p>
+                        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">
+                            Dipercaya menjadi Ketua Delegasi/Pimpinan Kontingen Cabang Makassar untuk menghadiri Perkemahan Antar Satuan Karya (Pergantara) tingkat regional di Gorontalo. Melatih keterampilan kepemimpinan tim, manajemen logistik, dan membangun jejaring kemitraan antar-cabang se-Indonesia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Event 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[38px] sm:-left-[54px] top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#2DD4BF] border-4 border-black neo-shadow-sm flex items-center justify-center">
+                        <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
+                    </div>
+                    <div class="bg-white p-6 neo-border neo-shadow rounded-xl max-w-3xl">
+                        <span class="bg-[#FB923C] font-display font-bold text-xs px-2.5 py-1 rounded neo-border-sm">TAHUN 2025 - SEKARANG</span>
+                        <h4 class="font-display font-bold text-xl sm:text-2xl mt-3">Pendidikan Jasa Konstruksi (PNUP)</h4>
+                        <p class="text-xs font-bold text-zinc-500 uppercase mt-1">Kelas 1B Jasa Konstruksi - Politeknik Negeri Ujung Pandang</p>
+                        <p class="text-zinc-600 text-sm mt-3 leading-relaxed">
+                            Mengembangkan keahlian rekayasa dasar sipil, estimasi biaya proyek (RAB), keselamatan kerja, kalkulasi pembebanan struktur, dan integrasi perangkat lunak berbasis BIM (*Building Information Modeling*).
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="py-12 text-center text-slate-500 text-sm">
-        <p>© 2026 Saidil. Proudly representing PNUP.</p>
+    <!-- PORTFOLIO / GALLERY SECTION WITH INTERACTIVE FILTER -->
+    <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <h2 class="font-display font-bold text-3xl sm:text-5xl inline-block bg-[#2DD4BF] px-4 py-2 neo-border neo-shadow-sm rotate-[-1deg]">
+                    GALERI KARYA & PROYEK
+                </h2>
+                <p class="mt-4 text-zinc-600 font-medium max-w-md">Eksplorasi representasi kerja profesional saya di bidang rekayasa konstruksi, aktivisme, dan kreasi media sosial.</p>
+            </div>
+
+            <!-- Brutalist Filter Button Group -->
+            <div class="flex flex-wrap gap-2 font-display font-bold text-sm bg-white p-2 neo-border neo-shadow-sm rounded-lg self-start">
+                <button class="px-3 py-1.5 rounded-md bg-black text-white transition-all filter-btn" data-filter="all" onclick="filterProjects('all'); playBeep();">Semua</button>
+                <button class="px-3 py-1.5 rounded-md hover:bg-zinc-200 transition-all filter-btn" data-filter="sipil" onclick="filterProjects('sipil'); playBeep();">Sipil</button>
+                <button class="px-3 py-1.5 rounded-md hover:bg-zinc-200 transition-all filter-btn" data-filter="tech" onclick="filterProjects('tech'); playBeep();">GSA / Tech</button>
+                <button class="px-3 py-1.5 rounded-md hover:bg-zinc-200 transition-all filter-btn" data-filter="kreatif" onclick="filterProjects('kreatif'); playBeep();">Kreatif</button>
+            </div>
+        </div>
+
+        <!-- Portfolio Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+            <!-- Project Card 1: Civil -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="sipil">
+                <div>
+                    <!-- Visual Placeholder / Image representation -->
+                    <div class="bg-[#FDE047] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">Struktur Sipil</span>
+                        <i class="fa-solid fa-hard-hat text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">MODELING & ANALISIS RUKO 3 LANTAI</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Studi pemodelan visual struktur beton bertulang untuk komersial ruko menggunakan Revit. Menerapkan analisis mekanika dasar struktur kolom dan pelat beban hidup/mati.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Autodesk Revit</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Konstruksi</span>
+                </div>
+            </div>
+
+            <!-- Project Card 2: Tech -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="tech">
+                <div>
+                    <div class="bg-[#2DD4BF] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">GSA / Tech</span>
+                        <i class="fa-solid fa-code text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">INTEGRASI AI PORTFOLIO APP</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Pengembangan situs portofolio digital kustom beraliran desain Brutalisme yang menggabungkan fitur interaktif JavaScript, kontrol efek audio, dan antarmuka dinamis modern.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">HTML5</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Tailwind CSS</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Gemini API</span>
+                </div>
+            </div>
+
+            <!-- Project Card 3: Kreatif -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="kreatif">
+                <div>
+                    <div class="bg-[#FB923C] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">Kreator Digital</span>
+                        <i class="fa-solid fa-video text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">EVENT VIDEO SAKA BHAYANGKARA</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Editing video kreatif pasca-acara delegasi Pergantara Gorontalo menggunakan CapCut. Konten dirancang dengan tempo transisi cepat untuk menarik engagement di TikTok dan Instagram.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">CapCut</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Brutalist Visual</span>
+                </div>
+            </div>
+
+            <!-- Project Card 4: Tech -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="tech">
+                <div>
+                    <div class="bg-[#FDE047] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">Aktivisme & GSA</span>
+                        <i class="fa-solid fa-globe text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">ROADSHOW SOSIALISASI AI KAMPUS</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Penyusunan modul sosialisasi alat AI produktif (Gemini Workspace & NotebookLM) bagi mahasiswa program studi teknik sipil guna mengoptimalkan penyusunan riset pustaka.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Workshop</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Google Workspace</span>
+                </div>
+            </div>
+
+            <!-- Project Card 5: Sipil -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="sipil">
+                <div>
+                    <div class="bg-[#2DD4BF] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">BIM SIPIL</span>
+                        <i class="fa-solid fa-cube text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">STRUKTUR BETON REINFORCEMENT</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Studi detail pembesian (*reinforcement detail*) balok dan struktur pondasi dangkal ruko. Memastikan kepatuhan standar K3 rekayasa konstruksi nasional SNI.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Tekla Detail</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">SNI Beton</span>
+                </div>
+            </div>
+
+            <!-- Project Card 6: Kreatif -->
+            <div class="bg-white neo-border neo-shadow rounded-xl overflow-hidden project-card flex flex-col justify-between" data-category="kreatif">
+                <div>
+                    <div class="bg-[#FB923C] h-48 border-b-4 border-black p-6 flex flex-col justify-between relative">
+                        <span class="bg-black text-white text-xs font-bold font-display px-2 py-1 uppercase tracking-wider self-start rounded">Desain Grafis</span>
+                        <i class="fa-solid fa-palette text-7xl text-black/20 absolute bottom-4 right-4"></i>
+                        <p class="font-display font-bold text-xl leading-tight text-black">BRUTALIST INSTAGRAM POST CARDS</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-sm leading-relaxed mb-4">
+                            Eksperimen desain *Feeds* Instagram bertema edukasi teknik sipil menggunakan gaya tipografi Brutalisme yang kaku, kontras tinggi, dan fungsional di platform Canva.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Canva</span>
+                    <span class="bg-zinc-100 text-xs font-bold px-2 py-1 border border-black rounded">Social Feed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE COMMAND CENTER SECTION -->
+    <section id="command" class="bg-black text-white py-16 sm:py-24 border-t-4 border-b-4 border-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+            <div class="mb-10 text-center">
+                <span class="bg-[#FB923C] text-black font-display font-bold px-3 py-1 text-sm rounded neo-border-sm inline-block mb-3">FITUR INTERAKTIF</span>
+                <h2 class="font-display font-bold text-3xl sm:text-5xl text-white">FACHRI'S COMMAND CENTER</h2>
+                <p class="mt-4 text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">Klik opsi di bawah ini untuk menginterogasi basis data saya atau mensimulasikan diskusi berbasis AI.</p>
+            </div>
+
+            <!-- Terminal Window -->
+            <div class="bg-zinc-900 border-4 border-zinc-700 rounded-xl overflow-hidden shadow-2xl">
+                <!-- Tab title bar -->
+                <div class="bg-zinc-800 px-4 py-3 flex items-center justify-between border-b-2 border-zinc-700">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3.5 h-3.5 rounded-full bg-red-500"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-yellow-400"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-green-500"></span>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-400">root@fachri-digital-mindset:~</span>
+                    <span class="w-5"></span>
+                </div>
+
+                <!-- Screen Terminal -->
+                <div class="p-6 font-mono text-sm space-y-4 min-h-[250px] max-h-[400px] overflow-y-auto" id="terminal-screen">
+                    <div class="text-[#2DD4BF]">&gt; Menginisialisasi basis data interaktif Muh. Fachri Akbar... [OK]</div>
+                    <div class="text-zinc-400">Selamat datang di Terminal Portofolio. Silakan tekan salah satu tombol interaksi di bawah untuk menanyakan status proyek, visi kepemimpinan, atau strategi kreatif saya.</div>
+                </div>
+
+                <!-- Option Buttons -->
+                <div class="p-4 bg-zinc-950 border-t-2 border-zinc-700 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button class="bg-zinc-800 hover:bg-zinc-700 border-2 border-zinc-600 p-3 rounded font-display font-bold text-sm text-[#FDE047] transition-all flex items-center justify-center gap-2" onclick="triggerTerminal('pilar'); playBeep();">
+                        <i class="fa-solid fa-compass"></i> Visi Struktur & AI
+                    </button>
+                    <button class="bg-zinc-800 hover:bg-zinc-700 border-2 border-zinc-600 p-3 rounded font-display font-bold text-sm text-[#2DD4BF] transition-all flex items-center justify-center gap-2" onclick="triggerTerminal('organisasi'); playBeep();">
+                        <i class="fa-solid fa-users"></i> Saka Bhayangkara & GSA
+                    </button>
+                    <button class="bg-zinc-800 hover:bg-zinc-700 border-2 border-zinc-600 p-3 rounded font-display font-bold text-sm text-[#FB923C] transition-all flex items-center justify-center gap-2" onclick="triggerTerminal('creator'); playBeep();">
+                        <i class="fa-solid fa-hashtag"></i> Pembuatan Konten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
+        <div class="bg-[#FDE047] p-8 sm:p-12 neo-border neo-shadow rounded-2xl relative overflow-hidden">
+            <!-- Decorative icon in bg -->
+            <i class="fa-solid fa-paper-plane text-9xl text-black/10 absolute -bottom-8 -right-8 pointer-events-none"></i>
+
+            <div class="relative z-10">
+                <h2 class="font-display font-bold text-3xl sm:text-5xl mb-4">MULAI KOLABORASI!</h2>
+                <p class="font-medium text-black max-w-xl mb-8">
+                    Ingin berdiskusi tentang proyek rekayasa konstruksi sipil, peluang kolaborasi Google Student Community, atau mengonsep visual media sosial berjiwa Brutalisme? Mari terhubung!
+                </p>
+
+                <!-- Feedback Message Container -->
+                <div id="form-feedback" class="hidden mb-6 p-4 bg-black text-[#2DD4BF] neo-border font-mono text-sm flex items-center gap-3">
+                    <i class="fa-solid fa-check-circle text-lg"></i>
+                    <span>Pesan berhasil dikirim! Fachri akan memproses pesan Anda sesegera mungkin.</span>
+                </div>
+
+                <!-- Form -->
+                <form id="contact-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex flex-col space-y-2">
+                            <label for="name" class="font-display font-bold text-sm">NAMA LENGKAP Anda</label>
+                            <input type="text" id="name" required class="bg-white neo-border p-3 rounded-lg focus:outline-none focus:bg-zinc-50 font-medium placeholder:text-zinc-400" placeholder="Muh. Fachri Akbar">
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label for="email" class="font-display font-bold text-sm">ALAMAT EMAIL</label>
+                            <input type="email" id="email" required class="bg-white neo-border p-3 rounded-lg focus:outline-none focus:bg-zinc-50 font-medium placeholder:text-zinc-400" placeholder="nama@email.com">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col space-y-2">
+                        <label for="message" class="font-display font-bold text-sm">PESAN KOLABORASI</label>
+                        <textarea id="message" rows="4" required class="bg-white neo-border p-3 rounded-lg focus:outline-none focus:bg-zinc-50 font-medium placeholder:text-zinc-400" placeholder="Tuliskan ide kolaborasi, tawaran proyek, atau pesan menarik di sini..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-900 font-display font-bold text-lg neo-border neo-shadow-sm transition-transform hover:translate-x-[-2px] hover:translate-y-[-2px] flex items-center justify-center gap-3" onclick="playBeep()">
+                        Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & SOCIAL CONNECT -->
+    <footer class="bg-black text-white border-t-4 border-black py-12 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h3 class="font-display font-bold text-2xl tracking-tight text-[#2DD4BF] mb-2">MUH. FACHRI AKBAR</h3>
+                <p class="text-xs text-zinc-400">Jasa Konstruksi PNUP &bull; Google Student Ambassador 2026</p>
+            </div>
+
+            <!-- Social Links - Hover Bounce Neo-Brutalist Icons -->
+            <div class="flex gap-4">
+                <a href="https://instagram.com" target="_blank" class="w-12 h-12 bg-[#FB923C] text-black neo-border rounded-lg flex items-center justify-center text-xl hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(255,255,255,1)] transition-all" onclick="playBeep()">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="w-12 h-12 bg-[#2DD4BF] text-black neo-border rounded-lg flex items-center justify-center text-xl hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(255,255,255,1)] transition-all" onclick="playBeep()">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="w-12 h-12 bg-[#FDE047] text-black neo-border rounded-lg flex items-center justify-center text-xl hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(255,255,255,1)] transition-all" onclick="playBeep()">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com" target="_blank" class="w-12 h-12 bg-white text-black neo-border rounded-lg flex items-center justify-center text-xl hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(255,255,255,1)] transition-all" onclick="playBeep()">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-zinc-800 mt-8 pt-8 text-center text-xs text-zinc-500 font-mono">
+            &copy; 2026 Muh. Fachri Akbar. Didesain secara Brutalisme dengan ❤️ dan Teknologi AI.
+        </div>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Web Audio API Retro Sound Effects
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playBeep() {
+            // Check if audio context is in suspended state (user interaction requirement)
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sine'; // Retro arcade style wave
+            osc.frequency.setValueAtTime(440, audioCtx.currentTime); // Pitch (A4)
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08); // Pitch up slide
+            
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // Toggle mobile drawer navigation menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-xl';
+            }
+        }
+
+        // Project filtering algorithm
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Toggle active style for filters
+            buttons.forEach(btn => {
+                const btnCat = btn.getAttribute('data-filter');
+                if (btnCat === category) {
+                    btn.className = "px-3 py-1.5 rounded-md bg-black text-white filter-btn transition-all";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-md hover:bg-zinc-200 filter-btn transition-all";
+                }
             });
-        });
+
+            // Filtering animation with smooth transitions
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                    // Trigger reflow for animation
+                    void card.offsetWidth; 
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    // Delay hiding for smooth scale-down effect
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 150);
+                }
+            });
+        }
+
+        // Simulated Command Center terminal actions
+        function triggerTerminal(topic) {
+            const screen = document.getElementById('terminal-screen');
+            let output = '';
+
+            if (topic === 'pilar') {
+                output = `
+                    <div class="text-[#2DD4BF]">&gt; fetch_pillar_info --academic</div>
+                    <div class="text-white">=== DESAIN STRUKTUR & INTEGRASI TEKNOLOGI ===</div>
+                    <div class="text-zinc-300">Studi di Kelas 1B Jasa Konstruksi PNUP melatih saya untuk memandang konstruksi fisik secara logis. Dengan memanfaatkan BIM (Revit/Tekla) yang didorong oleh asisten AI, alur kerja estimasi beban mekanika rekayasa menjadi jauh lebih dinamis dan bebas error.</div>
+                    <div class="text-zinc-500">Status: Aktif Merancang Proyek Ruko Komersial di Makassar</div>
+                `;
+            } else if (topic === 'organisasi') {
+                output = `
+                    <div class="text-[#2DD4BF]">&gt; load_experience --leadership</div>
+                    <div class="text-white">=== AKTIVIS GSA & DELEGASI GORONTALO ===</div>
+                    <div class="text-zinc-300">Organisasi mengasah visi taktis saya. Sebagai Pimpinan Kontingen Pergantara di Gorontalo, saya belajar mengomandoi taktik koordinasi regional. Kini, sebagai Google Student Ambassador 2026, tugas saya adalah membawa inisiatif tersebut ke arah kedaulatan digital berbasis kecerdasan buatan.</div>
+                    <div class="text-zinc-500">Event Terakhir: Rapat Program Kerja Google Developer PNUP</div>
+                `;
+            } else if (topic === 'creator') {
+                output = `
+                    <div class="text-[#2DD4BF]">&gt; list_media --brutalism</div>
+                    <div class="text-white">=== KREASI DIGITAL & ESTETIKA RETRO ===</div>
+                    <div class="text-zinc-300">Desain visual tidak boleh membosankan. Melalui CapCut dan Canva, saya menyebarkan konten edukasi rekayasa sipil & keseruan kepemimpinan dengan bumbu estetika Brutalisme (font tegas, kontras tinggi, tata letak asimetris) untuk mendobrak monotonitas algoritma feeds media sosial.</div>
+                    <div class="text-zinc-500">Target Reach: Eksperimen Brutalisme Feeds Instagram</div>
+                `;
+            }
+
+            // Append response and scroll to bottom of simulated window
+            screen.innerHTML += output;
+            screen.scrollTop = screen.scrollHeight;
+        }
+
+        // Simulated Contact Form Form Submission logic without alerts
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Collect info from inputs
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Simple verification check
+            if (name && email && message) {
+                // Show feedback message container with dynamic input confirmation
+                const feedback = document.getElementById('form-feedback');
+                feedback.classList.remove('hidden');
+                feedback.querySelector('span').innerText = `Terima kasih, ${name}! Pesan berhasil diteruskan secara lokal. Saya akan menghubungi kembali di email: ${email}.`;
+
+                // Reset inputs
+                document.getElementById('contact-form').reset();
+
+                // Smoothly hide feedback block after 10 seconds
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                }, 10000);
+            }
+        }
     </script>
 </body>
 </html>
